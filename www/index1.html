@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+     <title> NSP App</title>
+  <meta charset="utf-8">
+</head>
+<body>
+<div>
+  <form action="#" name="ss" id="s1">
+  NSP-Name
+      <input type="text" id="nsp" name="fname">
+  Event Name
+      <input type="text" id="a" name="fname">
+ App_name
+    <input type="text" id="b" name="fname">
+UserName
+  <input type="text" id="c" name="fname">
+  <input type="submit" value="submit">
+</form>
+
+</div>
+
+<form action="#" name="app" id="s2">
+Code
+    <input type="text" id="code" name="codename">
+message
+    <input type="text" id="msg" name="msgname">
+Data
+  <input type="text" id="data" name="dataname">
+
+<input type="submit" value="submit">
+
+</form>
+
+//getdata_ingest
+
+<form action="#" name="appingest" id="s3">
+ROOM Name
+    <input type="text" id="roomname" name="codename">
+
+<input type="submit" value="submit">
+
+</form>
+
+
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+  <script src="astrologs.js"></script>
+  <script src="astro_dataingest.js"></script>
+
+  <script >
+  //LOGGER FUN()
+    jQuery(function($)
+    {
+      var logger=getlogger("teamTracker","manoj",true);
+      var $ssForm = $('#s2');
+      var $code = $('#code');
+      var $message = $('#msg');
+      var $data = $('#data');
+    $ssForm.submit(function(e)
+      {
+          e.preventDefault();
+          console.log($code.val())
+          logger.info($code.val(),$message.val(),$data.val());
+          $code.val('');
+          $message.val('');
+          $data.val('');
+        });
+  });
+  </script >
+
+
+  <script >
+  //XCHANGE-LOC()
+    jQuery(function($)
+    {
+      var data_ingest=getdata_xchangeloc("teamTracker","manoj",true);
+      var $dataingestForm = $('#s3');
+      var $roomname = $('#roomname');
+      var userinfo=
+        {
+          "id": 007,
+          "pseudoName": "vasanth",
+          "name": "vasanthstack",
+          "phone": "9989789878123",
+          "email": "vasanth.yoyo@gmail.com",
+          "teams": "kubernetes",
+          "icon": "http://s3.kkkss-1-BCCI.jpg",
+          "location": {
+            "latitude":12.9643065,
+            "longitude":77.7141487
+          },
+          "mission": "sz"
+        };
+        console.log("data ingest frnd end fun call ");
+        $dataingestForm.submit(function(e)
+        {
+          e.preventDefault();
+          data_ingest.publishData($roomname.val(),userinfo);
+          $roomname.val('');
+
+        });
+  });
+  </script >
+
+
+
+
+
+
+</body>
+</html>
